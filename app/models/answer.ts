@@ -3,7 +3,11 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Answer extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
+  @column()
+  declare questionId: string
+  @column()
+  declare message: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
