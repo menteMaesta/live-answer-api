@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Live Answers API - OpenAPI 3.0
+  description: api for live answers
+  contact:
+    email: paulagomenr@gmail.com
+  license:
+    name: MIT License
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1:3333
+
+tags:
+  - name: questions
+    description: Operations for questions
+
+paths:
+  /api/questions:
+    post:
+      tags:
+        - questions
+      summary: Add a new question
+      description: Add a new question
+      requestBody:
+        description: Store a new question
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionReq'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Question'
+components:
+  schemas:
+    QuestionReq:
+      type: object
+      properties:
+        title:
+          type: string
+    Question:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/QuestionReq'
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
