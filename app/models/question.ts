@@ -5,7 +5,7 @@ import Answer from '#models/answer'
 
 export default class Question extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
   @column()
   declare title: string
 
