@@ -5,3 +5,11 @@ export const storeValidator = vine.compile(
     title: vine.string().trim(),
   })
 )
+
+export const showValidator = vine.compile(
+  vine.object({
+    params: vine.object({
+      question_id: vine.string(),
+    }),
+  })
+)

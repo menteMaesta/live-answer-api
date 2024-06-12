@@ -13,5 +13,6 @@ const QuestionsController = () => import('#controllers/questions_controller')
 router
   .group(() => {
     router.post('/questions', [QuestionsController, 'store'])
+    router.get('/questions/:question_id', [QuestionsController, 'show'])
   })
   .prefix('/api')
