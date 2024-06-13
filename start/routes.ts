@@ -16,5 +16,6 @@ router
     router.post('/questions', [QuestionsController, 'store'])
     router.get('/questions/:question_id', [QuestionsController, 'show'])
     router.post('/questions/:question_id/answers', [AnswersController, 'store'])
+    router.get('/questions/:question_id/answers', [AnswersController, 'index'])
   })
   .prefix('/api')

@@ -60,22 +60,55 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Answer'
+                $ref: '#/components/schemas/Question'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Answer'
+                $ref: '#/components/schemas/Question'
   /api/questions/{question_id}/answers:
+    get:
+      tags:
+        - answers
+      summary: Get all answers
+      description: Get all answers
+      parameters:
+        - name: question_id
+          in: path
+          description: 'id of the question'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
     post:
       tags:
-        - questions
-      summary: Add a new question
-      description: Add a new question
+        - answers
+      summary: Add a new answer
+      description: Add a new answer
+      parameters:
+        - name: question_id
+          in: path
+          description: 'id of the question'
+          required: true
+          schema:
+            type: string
       requestBody:
-        description: Store a new question
+        description: Store a new answer
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuestionReq'
+              $ref: '#/components/schemas/AnswerReq'
         required: true
       responses:
         '200':
@@ -83,10 +116,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Question'
+                $ref: '#/components/schemas/Answer'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Question'
+                $ref: '#/components/schemas/Answer'
+        '404':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Question not found'
 components:
   schemas:
     QuestionReq:

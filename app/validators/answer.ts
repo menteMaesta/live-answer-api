@@ -8,3 +8,11 @@ export const storeValidator = vine.compile(
     message: vine.string().trim(),
   })
 )
+
+export const indexValidator = vine.compile(
+  vine.object({
+    params: vine.object({
+      question_id: vine.string(),
+    }),
+  })
+)
