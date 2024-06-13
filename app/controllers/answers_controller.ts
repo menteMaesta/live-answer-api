@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
+import transmit from '@adonisjs/transmit/services/main'
 import { v4 as uuidv4 } from 'uuid'
 import { storeValidator, indexValidator } from '#validators/answer'
 import Question from '#models/question'
@@ -25,8 +26,9 @@ export default class AnswersController {
     } = await request.validateUsing(storeValidator)
     const question = await Question.findOrFail(questionId)
     if (question.id) {
-      const answer = await Answer.create({ message, questionId, id: uuidv4() }) // TODO: add socket event
+      const answer = await Answer.create({ message, questionId, id: uuidv4() })
       const answerJson = answer.serialize()
+      transmit.broadcast('newAnswer', answerJson)
       response.send(answerJson)
     } else {
       response.status(404).send({ message: 'Question not found' })
