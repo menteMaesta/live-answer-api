@@ -1,9 +1,12 @@
 import { test } from '@japa/runner'
+import testUtils from '@adonisjs/core/services/test_utils'
 import { v4 as uuidv4 } from 'uuid'
 import { QuestionFactory } from '#database/factories/question_factory'
 import { AnswerFactory } from '#database/factories/answer_factory'
 
-test.group('Answers', () => {
+test.group('Answers', (group) => {
+  group.each.setup(() => testUtils.db().truncate())
+
   test('Show all answers', async ({ client, route, assert }) => {
     const question = await QuestionFactory.merge({ id: uuidv4() }).create()
     const questionJson = question.serialize()

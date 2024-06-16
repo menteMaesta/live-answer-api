@@ -11,11 +11,19 @@ export default class QuestionsController {
 
     response.send(questionJson)
   }
+
   async show({ request, response }: HttpContext) {
     const {
       params: { question_id: questionId },
     } = await request.validateUsing(showValidator)
     const question = await Question.findOrFail(questionId)
+    const questionJson = question.serialize()
+
+    response.send(questionJson)
+  }
+
+  async showFirst({ response }: HttpContext) {
+    const question = await Question.firstOrFail()
     const questionJson = question.serialize()
 
     response.send(questionJson)

@@ -64,6 +64,22 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Question'
+  /api/question:
+    get:
+      tags:
+        - questions
+      summary: Get first question
+      description: Get first question
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Question'
   /api/questions/{question_id}/answers:
     get:
       tags:
