@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
+    "postbuild": "scp -i ~/.ssh/id_github -r ~/Developer/live-answer-api/build/* live-answers@198.199.67.42:/home/live-answers/live-answer-api-build",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",

@@ -1,5 +1,7 @@
 import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 
 const dbConfig = defineConfig({
   connection: 'postgres',
@@ -12,6 +14,9 @@ const dbConfig = defineConfig({
         user: env.get('DB_USER'),
         password: env.get('DB_PASSWORD'),
         database: env.get('DB_DATABASE'),
+        ...(env.get('NODE_ENV') === 'production'
+          ? { ssl: { ca: readFileSync(resolve() + '/ca-certificate.crt') } }
+          : undefined),
       },
       migrations: {
         naturalSort: true,
@@ -20,5 +25,4 @@ const dbConfig = defineConfig({
     },
   },
 })
-
 export default dbConfig
