@@ -28,7 +28,9 @@ export default class AnswersController {
     if (question.id) {
       const answer = await Answer.create({ message, questionId, id: uuidv4() })
       const answerJson = answer.serialize()
-      transmit.broadcast('newAnswer', answerJson)
+      const data = `data: ${JSON.stringify(answerJson)}\n\n`
+
+      transmit.broadcast('newAnswer', data)
       response.send(answerJson)
     } else {
       response.status(404).send({ message: 'Question not found' })
