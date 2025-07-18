@@ -5,8 +5,8 @@
   "type": "module",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "node": "v22.16.0",
+    "npm": "10.9.2"
   },
   "scripts": {
     "start": "cd build && node bin/server.js",
